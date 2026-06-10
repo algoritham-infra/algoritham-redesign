@@ -100,19 +100,23 @@ export const FOOTER_DEFAULT: Footer = {
 };
 
 export const HOME_DEFAULT: Home = {
-  // Mega wordmark hero. heroHeadlinePre is empty so the first big line is
-  // "Algoritham" with the brand gradient; "Infrastructure" sits below in
-  // lighter weight. Subhead is intentionally empty — heroBrandLine is the
-  // single supporting tagline.
-  heroEyebrow:           "Est. 2009 · Mumbai · National IT Integrator",
-  heroHeadlinePre:       "",
-  heroHeadlineGradient:  "Algoritham",
-  heroHeadlinePost:      "Infrastructure",
-  heroBrandLine:         "End-to-end IT, built to last. India-wide managed services since 2009.",
+  // Aceternity-inspired hero. Layout: HoverBorderGradient pill badge →
+  // two-line headline (line 1 plain bold, line 2 gradient sweep) → single
+  // description line → two CTAs → trust-signal strip.
+  heroEyebrow:           "Est. 2009 · 1200+ Enterprise Projects · Mumbai HQ",
+  heroHeadlinePre:       "Algoritham Infrastructure.",
+  heroHeadlineGradient:  "Built to last.",
+  heroHeadlinePost:      "",
+  heroBrandLine:         "Mumbai's national IT integrator. End-to-end managed services for servers, cloud, security, networking, and telecom — for Indian enterprises since 2009.",
   heroSubhead:           "",
-  heroPrimaryCta:   { label: "Get Free IT Assessment", href: "/contact",            variant: "primary" },
-  heroSecondaryCta: { label: PHONE_PRIMARY,            href: "tel:+919594267666",   variant: "secondary" },
-  heroBadges: [],
+  heroPrimaryCta:   { label: "Get Free IT Assessment", href: "/contact",            variant: "primary"   },
+  heroSecondaryCta: { label: "Talk to Princy",         href: "tel:+919594267666",   variant: "secondary" },
+  heroBadges: [
+    { icon: "Award",       label: "ISO 9001 Certified",   color: "purple" },
+    { icon: "ShieldCheck", label: "ITIL Aligned",          color: "rose"   },
+    { icon: "Activity",    label: "{uptime} Uptime SLA",   color: "cyan"   },
+    { icon: "Layers",      label: "1200+ Projects",        color: "purple" },
+  ],
   trustBarHeading:     "Trusted by leading enterprises across India",
   servicesEyebrow:     "What We Do",
   servicesHeadline:    "Everything your IT needs. Nothing it doesn't.",
