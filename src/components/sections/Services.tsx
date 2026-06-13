@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Server } from "lucide-react";
 import Link from "next/link";
 import { CardSpotlight } from "@/components/ui/card-spotlight";
+import { CircuitLines } from "@/components/ui/circuit-lines";
 import { iconFor } from "@/lib/icon-map";
 import type { Home, Service } from "@/sanity/types";
 
@@ -18,8 +19,13 @@ const ACCENT_THEME: Record<NonNullable<Service["accent"]>, {
 
 export function Services({ home, services }: { home: Home; services: Service[] }) {
   return (
-    <section id="services" className="bg-[var(--bg-base)] py-24">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="services" className="relative bg-[var(--bg-base)] py-24 overflow-hidden">
+      {/* Circuit-line illustration drifts across the top half */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[55%] opacity-30 [mask-image:linear-gradient(to_bottom,#000,transparent_80%)]">
+        <CircuitLines density={4} />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}

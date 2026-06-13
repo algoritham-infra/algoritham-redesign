@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { CheckCircle, ArrowRight, Sparkles, Server } from "lucide-react";
 import Link from "next/link";
 import { CardSpotlight } from "@/components/ui/card-spotlight";
+import { CircuitLines } from "@/components/ui/circuit-lines";
 import { iconFor } from "@/lib/icon-map";
 import type { Service, ServicesPage } from "@/sanity/types";
 
@@ -41,6 +42,9 @@ export function ServicesView({ page, services }: { page: ServicesPage; services:
     <>
       <section className="relative pt-24 pb-16 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(124,58,237,0.10),transparent)]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-full opacity-35 [mask-image:linear-gradient(to_bottom,#000,transparent_80%)]">
+          <CircuitLines density={4} />
+        </div>
         <div
           className="absolute inset-0 opacity-30 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000,transparent_85%)]"
           style={{

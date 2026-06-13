@@ -107,25 +107,26 @@ export function Infrastructure({ site, features, coverage }: Props) {
                   </span>
                 </div>
 
-                {/* Grouped by category: Facility & Hardware vs Operations & Workloads. */}
-                <div className="flex-1 space-y-5">
+                {/* Two groups stacked vertically; items within each group laid out
+                    horizontally (1 col on mobile → 3 cols from md). Map on the
+                    right stays untouched because each row is short. */}
+                <div className="flex-1 space-y-6">
                   {[
-                    { id: "facility",   label: "Facility & Hardware",     accent: "var(--accent-violet)" },
-                    { id: "operations", label: "Operations & Workloads",  accent: "var(--accent-cyan)"   },
+                    { id: "hypervisor", label: "Hypervisor & Virtualization", accent: "var(--accent-violet)" },
+                    { id: "facility",   label: "Facility & Operations",        accent: "var(--accent-cyan)"   },
                   ].map(({ id, label, accent }) => {
                     const group = features.filter((f) => (f.category ?? "facility") === id);
                     if (group.length === 0) return null;
                     return (
                       <div key={id}>
-                        <div className="flex items-center gap-2 mb-2.5">
-                          <span className="w-1 h-3 rounded-full" style={{ background: accent }} />
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className="w-1 h-3.5 rounded-full" style={{ background: accent }} />
                           <h4 className="text-[10px] font-bold uppercase tracking-widest" style={{ color: accent }}>
                             {label}
                           </h4>
                           <span className="flex-1 h-px bg-[var(--border)]" />
                         </div>
-                        {/* Single column stack — keeps the right-hand map readable. */}
-                        <div className="grid grid-cols-1 gap-3">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                           {group.map((f, i) => {
                             const Icon  = iconFor(f.icon, ShieldCheck);
                             const color = ACCENT_COLOR[f.accent ?? "violet"];

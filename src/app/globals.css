@@ -32,8 +32,8 @@
   --accent-cyan:          #0e7490;
   --accent-rose:          #be123c;
 
-  /* Hero globe */
-  --globe-opacity:    0.40;
+  /* Hero globe — lighter, broader (scaled up via transform in component) */
+  --globe-opacity:    0.22;
   --hero-edge:        rgba(248,250,252,0.85);
 }
 
@@ -55,8 +55,8 @@
   --accent-cyan:          #22d3ee;
   --accent-rose:          #fb7185;
 
-  /* Hero globe */
-  --globe-opacity:    0.55;
+  /* Hero globe — lighter, broader (scaled up via transform in component) */
+  --globe-opacity:    0.32;
   --hero-edge:        rgba(6,9,18,0.85);
 }
 

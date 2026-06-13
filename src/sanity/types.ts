@@ -235,7 +235,7 @@ export type HowItWorksStep = {
 
 export type InfrastructureFeature = {
   _id?: string;
-  category?: "facility" | "operations";
+  category?: "hypervisor" | "facility";
   icon?: string;
   title: string;
   desc?: string;

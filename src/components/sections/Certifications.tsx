@@ -1,13 +1,17 @@
 "use client";
 import { motion } from "framer-motion";
 import { Award } from "lucide-react";
+import { FloatingIcons } from "@/components/ui/floating-icons";
 import { iconFor } from "@/lib/icon-map";
 import type { Home, Certification } from "@/sanity/types";
 
 export function Certifications({ home, items }: { home: Home; items: Certification[] }) {
   return (
-    <section className="bg-[var(--bg-base)] py-24">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="relative bg-[var(--bg-base)] py-24 overflow-hidden">
+      {/* Slow-drifting domain icons in the background, masked away from centre
+          so the content reads cleanly. */}
+      <FloatingIcons className="absolute inset-0 pointer-events-none opacity-25 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,transparent_30%,#000_90%)]" />
+      <div className="relative max-w-7xl mx-auto px-6">
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
           <p className="text-xs font-semibold text-[var(--accent-violet)] uppercase tracking-widest mb-4">{home.certsEyebrow}</p>
           <h2 className="text-4xl md:text-5xl font-black text-[var(--text-1)] tracking-tight mb-4">{home.certsHeadline}</h2>

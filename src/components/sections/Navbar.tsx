@@ -1,11 +1,12 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ArrowRight } from "lucide-react";
+import { ChevronDown, ArrowRight, Sun, Moon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/components/ThemeProvider";
 import {
   Navbar as ResizableNavbar,
   NavBody,
@@ -16,6 +17,30 @@ import {
   NavbarButton,
 } from "@/components/ui/resizable-navbar";
 import type { Navigation, SiteSettings } from "@/sanity/types";
+
+function ThemeToggle() {
+  const { theme, toggle } = useTheme();
+  const isDark = theme === "dark";
+  return (
+    <button
+      onClick={toggle}
+      aria-label="Toggle theme"
+      className="w-9 h-9 rounded-full flex items-center justify-center text-[var(--text-2)] hover:text-[var(--text-1)] hover:bg-[var(--bg-card-2)] border border-[var(--border)] transition-all"
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={isDark ? "sun" : "moon"}
+          initial={{ rotate: -90, opacity: 0, scale: 0.6 }}
+          animate={{ rotate: 0,   opacity: 1, scale: 1   }}
+          exit={{    rotate: 90,  opacity: 0, scale: 0.6 }}
+          transition={{ duration: 0.2 }}
+        >
+          {isDark ? <Sun size={15} /> : <Moon size={15} />}
+        </motion.span>
+      </AnimatePresence>
+    </button>
+  );
+}
 
 type Props = { navigation: Navigation; site: SiteSettings };
 
@@ -145,6 +170,7 @@ export function Navbar({ navigation, site }: Props) {
           <BrandLogo site={site} />
           <NavLinksRow links={navigation.primary} pathname={pathname} />
           <div className="relative z-20 flex items-center gap-2 ml-auto">
+            <ThemeToggle />
             <NavbarButton href={ctaHref} variant="gradient">
               {ctaLabel}
               <ArrowRight size={12} />
@@ -157,6 +183,7 @@ export function Navbar({ navigation, site }: Props) {
         <MobileNavHeader>
           <BrandLogo site={site} />
           <div className="flex items-center gap-2">
+            <ThemeToggle />
             <MobileNavToggle isOpen={mobileOpen} onClick={() => setMobileOpen(!mobileOpen)} />
           </div>
         </MobileNavHeader>

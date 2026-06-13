@@ -8,8 +8,8 @@ export default defineType({
     defineField({ name: "order",     type: "number" }),
     defineField({ name: "category",  type: "string",
       options: { list: [
-        { title: "Facility & Hardware", value: "facility" },
-        { title: "Operations & Workloads", value: "operations" },
+        { title: "Hypervisor & Virtualization", value: "hypervisor" },
+        { title: "Facility & Operations",       value: "facility"   },
       ] },
       initialValue: "facility" }),
     defineField({ name: "icon",      type: "string" }),

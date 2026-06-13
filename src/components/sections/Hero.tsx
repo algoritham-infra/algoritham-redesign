@@ -59,12 +59,14 @@ export function Hero({ home, uptimeSLA, site }: Props) {
   return (
     <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-[var(--bg-base)]">
 
-      {/* ── Background layer 1: wireframe globe ───────────── */}
+      {/* ── Background layer 1: wireframe globe — broader & lighter ── */}
       <div
-        className="absolute inset-0 z-0 pointer-events-none"
+        className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center"
         style={{ opacity: "var(--globe-opacity)" }}
       >
-        <WireframeGlobe className="w-full h-full" />
+        <div className="w-[150%] h-[150%] sm:w-[140%] sm:h-[140%] -translate-y-[5%]">
+          <WireframeGlobe className="w-full h-full" />
+        </div>
       </div>
 
       {/* ── Background layer 2: dot grid, faded to centre ── */}

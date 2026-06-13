@@ -241,14 +241,14 @@ export const HOW_STEPS_DEFAULT: HowItWorksStep[] = [
 ];
 
 export const INFRASTRUCTURE_FEATURES_DEFAULT: InfrastructureFeature[] = [
-  // ── Facility & Hardware ───────────────────────────────
-  { category: "facility",   icon: "ShieldCheck", accent: "violet", title: "Tier 3+ Power & Cooling", desc: "Redundant UPS, N+1 cooling, 100% SLA on environment & access control.", stat: "100%",  statLabel: "Power SLA" },
-  { category: "facility",   icon: "Eye",         accent: "cyan",   title: "24/7 On-Site Security",   desc: "Mantraps, biometric screening, CCTV, security guards.",                    stat: "24/7",  statLabel: "Manned" },
-  { category: "facility",   icon: "Cpu",         accent: "rose",   title: "Enterprise OEMs",         desc: "IBM · Lenovo · HP · Dell — vendor-neutral architecture.",                  stat: "4+",    statLabel: "OEMs" },
-  // ── Operations & Workloads ────────────────────────────
-  { category: "operations", icon: "Activity",    accent: "rose",   title: "Round-the-Clock NOC",     desc: "Passive + active monitoring with sub-15-minute mean response.",            stat: "<15m",  statLabel: "MTTR" },
-  { category: "operations", icon: "Layers",      accent: "violet", title: "HA Clustering",           desc: "No single point of failure across compute, storage & network.",            stat: "N+1",   statLabel: "Redundancy" },
-  { category: "operations", icon: "HardDrive",   accent: "cyan",   title: "Server & Desktop Virt",   desc: "Hypervisor-grade VMware, Hyper-V & Citrix workloads.",                     stat: "3",     statLabel: "Hypervisors" },
+  // ── Hypervisor & Virtualization (compute / software stack) ────
+  { category: "hypervisor", icon: "HardDrive",   accent: "cyan",   title: "Server & Desktop Virtualization", desc: "Hypervisor-grade VMware, Hyper-V & Citrix workloads — production-tested at scale.", stat: "3",     statLabel: "Hypervisors" },
+  { category: "hypervisor", icon: "Layers",      accent: "violet", title: "HA Clustering",                   desc: "No single point of failure across compute, storage & network.",                      stat: "N+1",   statLabel: "Redundancy" },
+  { category: "hypervisor", icon: "Cpu",         accent: "rose",   title: "Enterprise OEMs",                 desc: "IBM · Lenovo · HP · Dell — vendor-neutral architecture for any workload.",            stat: "4+",    statLabel: "OEMs" },
+  // ── Facility & Operations (physical + monitoring) ─────────────
+  { category: "facility",   icon: "ShieldCheck", accent: "violet", title: "Tier 3+ Power & Cooling",         desc: "Redundant UPS, N+1 cooling, 100% SLA on environment & access control.",               stat: "100%",  statLabel: "Power SLA" },
+  { category: "facility",   icon: "Eye",         accent: "cyan",   title: "24/7 On-Site Security",           desc: "Mantraps, biometric screening, CCTV, security guards.",                              stat: "24/7",  statLabel: "Manned" },
+  { category: "facility",   icon: "Activity",    accent: "rose",   title: "Round-the-Clock NOC",             desc: "Passive + active monitoring with sub-15-minute mean response.",                      stat: "<15m",  statLabel: "MTTR" },
 ];
 
 export const COVERAGE_DEFAULT: CoverageNode[] = [
