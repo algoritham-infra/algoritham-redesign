@@ -11,9 +11,14 @@
  *
  * Requires SANITY_API_TOKEN with write access (Editor or Administrator).
  */
-import "dotenv/config";
+import { config as dotenv } from "dotenv";
+import { resolve } from "path";
 import { createClient } from "next-sanity";
 import * as D from "../src/sanity/defaults";
+
+// Load .env.local first (Next.js convention), then fall back to .env
+dotenv({ path: resolve(__dirname, "../.env.local") });
+dotenv({ path: resolve(__dirname, "../.env") });
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "gphbi065";
 const dataset   = process.env.NEXT_PUBLIC_SANITY_DATASET    ?? "production";
