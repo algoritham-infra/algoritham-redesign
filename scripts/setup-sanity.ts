@@ -65,28 +65,33 @@ async function setupCors() {
 
 async function setupWebhook() {
   console.log("\n→ Revalidate webhook");
-  const existing: { url: string; name: string }[] = await listJson("/hooks");
+  // Webhook API lives under /v2021-10-04/hooks/projects/{projectId}, NOT
+  // the standard /vYYYY-MM-DD/projects/{projectId}/hooks path.
+  const HOOKS_BASE = `https://api.sanity.io/v2021-10-04/hooks/projects/${projectId}`;
+  const r = await fetch(HOOKS_BASE, { headers });
+  if (!r.ok) { console.log(`  ✗ list failed: ${r.status} ${await r.text()}`); return; }
+  const existing: { url: string; name: string }[] = await r.json();
   const matched = existing.find((h) => h.url === WEBHOOK_URL);
   if (matched) {
-    console.log(`  · already exists: ${matched.name}`);
+    console.log(`  · already exists: ${matched.name} → ${matched.url}`);
     return;
   }
-  try {
-    await postJson("/hooks", {
+  const create = await fetch(HOOKS_BASE, {
+    method: "POST", headers,
+    body: JSON.stringify({
       type:     "document",
       name:     "Next.js revalidate",
       dataset,
       url:      WEBHOOK_URL,
       httpMethod: "POST",
-      apiVersion: "v2025-01-01",
+      apiVersion: "v2021-03-25",
       includeDrafts: false,
       secret,
       rule: { on: ["create", "update", "delete"] },
-    });
-    console.log(`  ✓ ${WEBHOOK_URL}`);
-  } catch (e) {
-    console.log(`  ✗ ${WEBHOOK_URL} — ${(e as Error).message.slice(0, 200)}`);
-  }
+    }),
+  });
+  if (create.ok) console.log(`  ✓ ${WEBHOOK_URL}`);
+  else console.log(`  ✗ ${WEBHOOK_URL} — ${create.status} ${await create.text()}`);
 }
 
 (async () => {
