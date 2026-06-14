@@ -5,8 +5,10 @@ export function BentoGrid({
   children,
   className = "",
 }: { children: ReactNode; className?: string }) {
+  // grid-flow-row-dense lets smaller items backfill gaps left by taller/wider
+  // ones — eliminates the empty cells the previous (row-only flow) had.
   return (
-    <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 auto-rows-[14rem] sm:auto-rows-[16rem] gap-4 ${className}`}>
+    <div className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 auto-rows-[12rem] sm:auto-rows-[15rem] lg:auto-rows-[16rem] gap-3 sm:gap-4 grid-flow-row-dense ${className}`}>
       {children}
     </div>
   );
