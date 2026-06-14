@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
+import { OrbitRings } from "@/components/ui/orbit-rings";
 import type { Home, Testimonial } from "@/sanity/types";
 
 const Card = ({ t }: { t: Testimonial }) => (
@@ -25,7 +26,11 @@ export function Testimonials({ home, items }: { home: Home; items: Testimonial[]
 
   return (
     <section className="relative bg-[var(--bg-card)] py-24 border-t border-[var(--border)] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 mb-12">
+      {/* Orbital rings as decorative backdrop behind the header */}
+      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] opacity-20 [mask-image:radial-gradient(ellipse_50%_55%_at_50%_50%,#000,transparent_75%)]">
+        <OrbitRings rings={2} />
+      </div>
+      <div className="relative max-w-7xl mx-auto px-6 mb-12">
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center">
           <p className="text-xs font-semibold text-[var(--accent-cyan)] uppercase tracking-widest mb-4">{home.testimonialsEyebrow}</p>
           <h2 className="text-4xl md:text-5xl font-black text-[var(--text-1)] tracking-tight">{home.testimonialsHeadline}</h2>

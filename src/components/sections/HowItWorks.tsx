@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { CardSpotlight } from "@/components/ui/card-spotlight";
+import { CircuitLines } from "@/components/ui/circuit-lines";
 import { iconFor } from "@/lib/icon-map";
 import type { Home, HowItWorksStep } from "@/sanity/types";
 
@@ -21,6 +22,11 @@ export function HowItWorks({ home, steps }: { home: Home; steps: HowItWorksStep[
           backgroundSize: "26px 26px",
         }}
       />
+
+      {/* Decorative circuit lines drift across the section */}
+      <div className="pointer-events-none absolute inset-0 opacity-20 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,#000,transparent_85%)]">
+        <CircuitLines density={4} />
+      </div>
 
       <div className="relative max-w-7xl mx-auto px-6">
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">

@@ -2,14 +2,18 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { CircuitLines } from "@/components/ui/circuit-lines";
 import type { Home, CaseStudy } from "@/sanity/types";
 
 type Props = { home: Home; cases: CaseStudy[] };
 
 export function CaseStudies({ home, cases }: Props) {
   return (
-    <section id="case-studies" className="bg-[var(--bg-base)] py-24">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="case-studies" className="relative bg-[var(--bg-base)] py-24 overflow-hidden">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 opacity-25 [mask-image:linear-gradient(to_top,#000,transparent_90%)]">
+        <CircuitLines density={4} />
+      </div>
+      <div className="relative max-w-7xl mx-auto px-6">
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
           <div>

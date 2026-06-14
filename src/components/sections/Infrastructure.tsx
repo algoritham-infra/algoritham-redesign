@@ -5,6 +5,7 @@ import { Server, Zap, ArrowUpRight, ShieldCheck } from "lucide-react";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { CardSpotlight } from "@/components/ui/card-spotlight";
 import { SkeletonMap } from "@/components/ui/skeleton";
+import { DataStream } from "@/components/ui/data-stream";
 import { iconFor } from "@/lib/icon-map";
 import type { CoverageNode as CoverageNodeType, InfrastructureFeature, SiteSettings } from "@/sanity/types";
 import type { CoverageNode as MapCoverageNode } from "@/components/ui/india-coverage-map";
@@ -44,8 +45,11 @@ export function Infrastructure({ site, features, coverage }: Props) {
   }));
 
   return (
-    <section id="infrastructure" className="bg-[var(--bg-base)] py-24">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="infrastructure" className="relative bg-[var(--bg-base)] py-24 overflow-hidden">
+      {/* Vertical data streams drift down the side margins */}
+      <DataStream className="absolute left-4 sm:left-10 top-32 h-[60%] w-10 opacity-50 hidden md:block" />
+      <DataStream className="absolute right-4 sm:right-10 top-48 h-[55%] w-10 opacity-40 hidden md:block" />
+      <div className="relative max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}

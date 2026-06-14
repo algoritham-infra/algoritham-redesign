@@ -4,6 +4,7 @@ import { Camera, Sparkles } from "lucide-react";
 import { urlFor } from "@/sanity/image";
 import { LayoutGrid, type LayoutCard } from "@/components/ui/layout-grid";
 import { Spotlight } from "@/components/ui/spotlight";
+import { OrbitRings } from "@/components/ui/orbit-rings";
 import type { Home, EventPhoto } from "@/sanity/types";
 
 // Fallback paths — order MUST match EVENT_PHOTOS_DEFAULT in defaults.ts.
@@ -54,6 +55,12 @@ export function EventGallery({ home, photos }: Props) {
 
       {/* Atmospheric layers */}
       <Spotlight className="-top-32 left-1/2 -translate-x-1/2 h-[60vh] w-[80vw] opacity-60" fill="#7c3aed" />
+
+      {/* Orbital rings illustration — sits behind the header */}
+      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[700px] opacity-25 [mask-image:radial-gradient(ellipse_50%_60%_at_50%_50%,#000,transparent_75%)]">
+        <OrbitRings rings={3} />
+      </div>
+
       <div
         className="absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_60%_at_50%_30%,#000,transparent_85%)] pointer-events-none"
         style={{
