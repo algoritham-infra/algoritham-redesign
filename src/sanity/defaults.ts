@@ -302,6 +302,8 @@ export const TESTIMONIALS_DEFAULT: Testimonial[] = [
   { quote: "Algoritham helped us go from a fragmented mess of office IT to a single MPLS-backed, monitored estate. Quarterly board reporting on IT is now a five-minute slide.", name: "Devansh Kapoor",    role: "Group CIO",          company: "Hospitality Group" },
 ];
 
+// Flagship OEM partners with brand-mark SVGs already in the codebase.
+// These render in the AnimatedTooltip row for the strongest visual signal.
 export const PARTNERS_DEFAULT: Partner[] = [
   { name: "Microsoft",     designation: "Authorized Partner", logoKey: "Microsoft" },
   { name: "Fortinet",      designation: "Security Partner",   logoKey: "Fortinet"  },
@@ -312,30 +314,46 @@ export const PARTNERS_DEFAULT: Partner[] = [
   { name: "IBM",           designation: "Enterprise Partner", logoKey: "IBM"       },
 ];
 
-// Expanded list — editors can replace with real client names via Studio.
-// Marquee/scroller handles 50+ entries comfortably.
+// Full OEM roster from the team — displayed in the scrolling marquee row
+// under the flagship partners. Cisco, Brocade, Systimax intentionally omitted
+// pending resolution of the ongoing legal matter.
+export const OEMS_DEFAULT: string[] = [
+  "IBM", "HP", "Amazon Web Services (AWS)", "Microsoft", "Tata Communications",
+  "Adobe", "Juniper Networks", "Red Hat", "Veeam", "Lenovo", "McAfee", "Acronis",
+  "Microsoft Azure", "Hewlett Packard Enterprise (HPE)", "Tyco", "Molex",
+  "Netmagic (NTT Communications)", "NetApp", "Commvault", "Druva", "CorelDRAW",
+  "SolarWinds", "Sophos", "D-Link", "Check Point", "Schneider Electric", "Veritas",
+  "VMware", "APC by Schneider Electric", "AMP Netconnect", "Barracuda Networks",
+  "Dell EMC", "Emerson", "Seqrite", "Digilink", "Fortinet", "3Gen Consulting",
+];
+
+// Real client list from the team. Marquee ticker under the OEM strip.
 export const CLIENTS_DEFAULT: Client[] = [
-  { name: "GoodRich" }, { name: "Neo Nich" }, { name: "CCI Group" },
-  { name: "A Leading Investment Group" }, { name: "Financial Services Giant" },
-  { name: "Reputed Online Shopping Channel" }, { name: "Oracle Database on AWS" },
-  { name: "Multi-Specialty Hospital Network" }, { name: "BFSI Conglomerate" },
-  { name: "Manufacturing Major" }, { name: "Logistics & Distribution" },
-  { name: "Insurance Group" }, { name: "Retail Chain" }, { name: "Hospitality Group" },
-  { name: "Western India Distributor" }, { name: "Mumbai Pharma Major" },
-  { name: "South India Logistics" }, { name: "Banking Cooperative" },
-  { name: "Healthcare Trust" }, { name: "Mid-cap FMCG" }, { name: "EPC Contractor" },
-  { name: "Education Group" }, { name: "Real Estate Developer" },
-  { name: "Government Department" }, { name: "Energy Major" }, { name: "Aviation MRO" },
-  { name: "Media House" }, { name: "Capital Markets Firm" }, { name: "Public Sector Utility" },
-  { name: "Telecom Carrier" }, { name: "Co-operative Bank" }, { name: "Stock Brokerage" },
-  { name: "Construction Conglomerate" }, { name: "Agro-Processing Giant" },
-  { name: "Cement Producer" }, { name: "Specialty Chemicals" }, { name: "Auto-Components" },
-  { name: "K-12 Education Network" }, { name: "Higher Education Trust" },
-  { name: "Charity Foundation" }, { name: "Co-working Operator" }, { name: "Logistics Tech Firm" },
-  { name: "Last-Mile Delivery" }, { name: "Hotel Chain" }, { name: "QSR Brand" },
-  { name: "Luxury Retail" }, { name: "Beauty & Wellness Group" }, { name: "Apparel House" },
-  { name: "BPO Services" }, { name: "Shared Services Centre" }, { name: "ITES Major" },
-  { name: "Captive Finance Arm" }, { name: "NBFC" }, { name: "Asset Management Co" },
+  { name: "Sula Vineyards" },
+  { name: "RSM" },
+  { name: "Hansa Cequity" },
+  { name: "Rusan Pharma" },
+  { name: "Shilpa Medicare" },
+  { name: "Goodrich Maritime" },
+  { name: "upGrad" },
+  { name: "Red Chillies Entertainment" },
+  { name: "Eros International" },
+  { name: "Neoniche" },
+  { name: "Ullu" },
+  { name: "Eduauraa" },
+  { name: "Sapura Energy" },
+  { name: "Shemaroo Entertainment" },
+  { name: "SFC Energy" },
+  { name: "Mahindra Lifespaces" },
+  { name: "Gandhi Automations" },
+  { name: "Ajmal Perfumes" },
+  { name: "Akasa Air" },
+  { name: "Susten by Mahindra" },
+  { name: "TBZ (Tribhovandas Bhimji Zaveri)" },
+  { name: "Agilus Diagnostics" },
+  { name: "Naaptol" },
+  { name: "IDfy" },
+  { name: "BCCL (Bennett, Coleman & Co.)" },
 ];
 
 export const CERTIFICATIONS_DEFAULT: Certification[] = [

@@ -12,6 +12,7 @@ type Props = {
   heading: string;
   partners: Partner[];
   clients: Client[];
+  oems: string[];
   site: SiteSettings;
 };
 
@@ -25,7 +26,7 @@ const LOGO_REGISTRY: Record<string, ComponentType<{ className?: string }>> = {
   IBM:       IBMLogo,
 };
 
-export function TrustBar({ heading, partners, clients, site }: Props) {
+export function TrustBar({ heading, partners, clients, oems, site }: Props) {
   const partnerLogos = partners.map((p, i) => ({
     id: i + 1,
     name: p.name,
@@ -58,20 +59,55 @@ export function TrustBar({ heading, partners, clients, site }: Props) {
           <AnimatedTooltip items={partnerLogos} />
         </div>
 
-        {/* Ticker — duration scales with the number of clients so 50+ stays
-            readable. Each name gets ~1.2s of on-screen time. */}
-        <div className="relative overflow-hidden mb-12">
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[var(--bg-card)] to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[var(--bg-card)] to-transparent z-10" />
-          <motion.div
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: Math.max(30, tickerNames.length * 1.2), repeat: Infinity, ease: "linear" }}
-            className="flex gap-10 whitespace-nowrap"
-          >
-            {[...tickerNames, ...tickerNames].map((c, i) => (
-              <span key={i} className="text-[var(--text-3)] font-semibold text-sm tracking-wide shrink-0">{c}</span>
-            ))}
-          </motion.div>
+        {/* OEM strip — full alliance roster as branded pill tiles scrolling
+            right-to-left. Two copies concatenated for seamless loop. */}
+        {oems.length > 0 && (
+          <div className="mb-8">
+            <p className="text-center text-[10px] font-semibold text-[var(--text-3)] uppercase tracking-widest mb-4 opacity-70">
+              Trusted Industry Collaborations
+            </p>
+            <div className="relative overflow-hidden">
+              <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[var(--bg-card)] to-transparent z-10" />
+              <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[var(--bg-card)] to-transparent z-10" />
+              <motion.div
+                animate={{ x: ["0%", "-50%"] }}
+                transition={{ duration: Math.max(40, oems.length * 1.4), repeat: Infinity, ease: "linear" }}
+                className="flex gap-3 whitespace-nowrap"
+              >
+                {[...oems, ...oems].map((name, i) => (
+                  <span
+                    key={i}
+                    className="shrink-0 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold text-[var(--text-2)] bg-[var(--bg-card-2)] border border-[var(--border)] hover:border-[var(--accent-violet-border)] hover:text-[var(--text-1)] transition-colors"
+                  >
+                    <span className="w-1 h-1 rounded-full bg-[var(--accent-violet)] opacity-60" />
+                    {name}
+                  </span>
+                ))}
+              </motion.div>
+            </div>
+          </div>
+        )}
+
+        {/* Client ticker — real client names scrolling left-to-right (opposite
+            direction from OEMs above for visual contrast). Duration scales
+            with count so 25+ names stay readable. */}
+        <div className="mb-12">
+          <p className="text-center text-[10px] font-semibold text-[var(--text-3)] uppercase tracking-widest mb-4 opacity-70">
+            Selected Clients
+          </p>
+          <div className="relative overflow-hidden">
+            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[var(--bg-card)] to-transparent z-10" />
+            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[var(--bg-card)] to-transparent z-10" />
+            <motion.div
+              animate={{ x: ["-50%", "0%"] }}
+              transition={{ duration: Math.max(35, tickerNames.length * 1.6), repeat: Infinity, ease: "linear" }}
+              className="flex gap-10 whitespace-nowrap"
+            >
+              {[...tickerNames, ...tickerNames].map((c, i) => (
+                <span key={i} className="text-[var(--text-2)] font-bold text-base tracking-wide shrink-0">{c}</span>
+              ))}
+            </motion.div>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">

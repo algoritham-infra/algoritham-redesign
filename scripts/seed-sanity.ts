@@ -48,6 +48,19 @@ async function listItem(type: string, key: string, doc: Record<string, unknown>)
   await client.createIfNotExists({ _id, _type: type, ...doc });
 }
 
+// Wipe every existing document of a type before seeding — for lists where the
+// team has replaced placeholder data and we want to guarantee no stale rows.
+async function wipeType(type: string) {
+  const ids = await client.fetch<string[]>(`*[_type == $type]._id`, { type });
+  if (ids.length === 0) return;
+  const tx = client.transaction();
+  ids.forEach((id) => tx.delete(id));
+  await tx.commit();
+  console.log(`  ✂  wiped ${ids.length} ${type} document(s)`);
+}
+
+const WIPE_ARG = process.argv.includes("--reset-lists");
+
 async function seedSingletons() {
   console.log("\n→ Singletons");
   await singleton("siteSettings",     "siteSettings",     D.SITE_SETTINGS_DEFAULT);
@@ -100,12 +113,14 @@ async function seedLists() {
   console.log(`  ✓ ${D.TESTIMONIALS_DEFAULT.length} testimonials`);
 
   console.log("→ Partners");
+  if (WIPE_ARG) await wipeType("partner");
   for (const [i, p] of D.PARTNERS_DEFAULT.entries()) {
     await listItem("partner", `p-${slug(p.name)}`, { ...p, order: i + 1 });
   }
   console.log(`  ✓ ${D.PARTNERS_DEFAULT.length} partners`);
 
   console.log("→ Clients");
+  if (WIPE_ARG) await wipeType("client");
   for (const [i, c] of D.CLIENTS_DEFAULT.entries()) {
     await listItem("client", `c-${slug(c.name)}-${i}`, { ...c, order: i + 1 });
   }

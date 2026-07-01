@@ -28,6 +28,9 @@ export const featuredCaseStudies = async () => orEmpty(await Q.getFeaturedCaseSt
 export const testimonials   = async () => orEmpty(await Q.getTestimonials(),   D.TESTIMONIALS_DEFAULT);
 export const partners       = async () => orEmpty(await Q.getPartners(),       D.PARTNERS_DEFAULT);
 export const clients        = async () => orEmpty(await Q.getClients(),        D.CLIENTS_DEFAULT);
+// OEM roster is a plain string list (no per-item Sanity doc). Edit in defaults
+// or promote to a Sanity list document later if the team needs to reorder.
+export const oems           = () => D.OEMS_DEFAULT;
 export const certifications = async () => orEmpty(await Q.getCertifications(), D.CERTIFICATIONS_DEFAULT);
 export const industries     = async () => orEmpty(await Q.getIndustries(),     D.INDUSTRIES_DEFAULT);
 export const eventPhotos    = async () => orEmpty(await Q.getEventPhotos(),    D.EVENT_PHOTOS_DEFAULT);
