@@ -13,6 +13,7 @@
  */
 import { config as dotenv } from "dotenv";
 import { resolve } from "path";
+import { readFileSync, existsSync } from "fs";
 import { createClient } from "next-sanity";
 import * as D from "../src/sanity/defaults";
 
@@ -60,6 +61,50 @@ async function wipeType(type: string) {
 }
 
 const WIPE_ARG = process.argv.includes("--reset-lists");
+
+// ─── Image upload helpers ─────────────────────────────────────────────
+type ImageRef = { _type: "image"; asset: { _type: "reference"; _ref: string } };
+
+const uploadedCache = new Map<string, string>();
+
+async function uploadFromPublic(filename: string): Promise<ImageRef | null> {
+  if (uploadedCache.has(filename)) {
+    return {
+      _type: "image",
+      asset: { _type: "reference", _ref: uploadedCache.get(filename)! },
+    };
+  }
+  const filepath = resolve(__dirname, "../public", filename);
+  if (!existsSync(filepath)) {
+    console.warn(`  ⚠  image missing: ${filename}`);
+    return null;
+  }
+  const buffer = readFileSync(filepath);
+  const asset = await client.assets.upload("image", buffer, {
+    filename: filename.split("/").pop(),
+  });
+  uploadedCache.set(filename, asset._id);
+  console.log(`  ↑ uploaded ${filename} → ${asset._id}`);
+  return {
+    _type: "image",
+    asset: { _type: "reference", _ref: asset._id },
+  };
+}
+
+// Same ordering as FALLBACK_SRCS in EventGallery.tsx.
+const EVENT_PHOTO_FILES = [
+  "gallery/rnr-event-2026.jpg",
+  "gallery/adobe-immersion-2026.jpg",
+  "gallery/adobe-ai-briefing.jpg",
+  "gallery/adobe-ai-deep-dive.jpg",
+  "gallery/adobe-team-2026.jpg",
+  "gallery/lts.webp",
+  "gallery/sup.webp",
+  "gallery/mx.webp",
+  "gallery/mix1.webp",
+  "gallery/im.webp",
+  "gallery/amk-team.webp",
+];
 
 async function seedSingletons() {
   console.log("\n→ Singletons");
@@ -138,9 +183,16 @@ async function seedLists() {
   }
   console.log(`  ✓ ${D.INDUSTRIES_DEFAULT.length} industries`);
 
-  console.log("→ Event photos");
+  console.log("→ Event photos (uploads assets from /public/gallery/)");
+  if (WIPE_ARG) await wipeType("eventPhoto");
   for (const [i, p] of D.EVENT_PHOTOS_DEFAULT.entries()) {
-    await listItem("eventPhoto", `ev-${slug(p.caption)}-${i}`, { ...p, order: i + 1 });
+    const filename = EVENT_PHOTO_FILES[i];
+    const image = filename ? await uploadFromPublic(filename) : null;
+    await listItem("eventPhoto", `ev-${slug(p.caption)}-${i}`, {
+      ...p,
+      ...(image ? { image } : {}),
+      order: i + 1,
+    });
   }
   console.log(`  ✓ ${D.EVENT_PHOTOS_DEFAULT.length} event photos`);
 }

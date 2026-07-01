@@ -11,7 +11,16 @@ export default defineType({
     defineField({ name: "phone",     type: "string" }),
     defineField({ name: "service",   type: "string" }),
     defineField({ name: "message",   type: "text", rows: 5, validation: (R) => R.required() }),
-    defineField({ name: "createdAt", type: "datetime", readOnly: true }),
+    defineField({ name: "createdAt", type: "datetime", readOnly: true, description: "Set automatically on submit." }),
   ],
-  preview: { select: { title: "name", subtitle: "company" } },
+  orderings: [
+    { name: "newest", title: "Newest first", by: [{ field: "createdAt", direction: "desc" }] },
+  ],
+  preview: {
+    select: { title: "name", subtitle: "company", email: "email", createdAt: "createdAt" },
+    prepare: ({ title, subtitle, email, createdAt }) => ({
+      title: `${title}${subtitle ? ` — ${subtitle}` : ""}`,
+      subtitle: [email, createdAt ? new Date(createdAt).toLocaleString() : null].filter(Boolean).join(" · "),
+    }),
+  },
 });
