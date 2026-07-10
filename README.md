@@ -19,8 +19,10 @@ Marketing website for **Algoritham Infrastructure Pvt. Ltd.**, a Mumbai-based na
 9. [Forms (contact + newsletter)](#forms-contact--newsletter)
 10. [Deployment](#deployment)
 11. [DNS / domain setup](#dns--domain-setup)
-12. [Security](#security)
-13. [Common tasks & troubleshooting](#common-tasks--troubleshooting)
+12. [Accounts, access & credentials](#accounts-access--credentials)
+13. [Ownership transfer](#ownership-transfer)
+14. [Security](#security)
+15. [Common tasks & troubleshooting](#common-tasks--troubleshooting)
 
 ---
 
@@ -285,6 +287,112 @@ The domain is registered at **Hostinger**; the marketing site is served by
 
 Add the production domain(s) in Vercel → Project → Settings → Domains, and add
 them to Sanity CORS origins so `/studio` loads there.
+
+---
+
+## Accounts, access & credentials
+
+The project spans four external services. Here's what each is, the
+**non-secret** identifiers, and **where the real credentials live** (they are
+deliberately **not** stored in this repository).
+
+| Service | What it's for | How you log in | Non-secret IDs |
+|---|---|---|---|
+| **GitHub** | Source code + auto-deploy trigger | GitHub account with repo access | repo: `algoritham-redesign` |
+| **Vercel** | Hosting, builds, env vars, domains | Vercel account added to the project/team | project: `algoritham-redesign` |
+| **Sanity** | CMS content + Studio | Sanity account added as a project member | project ID: `gphbi065` · org ID: `oEhGWitni` · dataset: `production` |
+| **Hostinger** | Domain registrar + DNS + CRM + email | Hostinger account (domain owner) | domain: `algoritham.com` |
+
+### Where the secrets actually live
+
+> **Never commit passwords or API tokens to this repository.** It is version
+> controlled and shared; a leaked token gives write access to the CMS. All
+> secrets live in the dashboards below and are injected at runtime.
+
+| Secret | Lives in | How to view / rotate |
+|---|---|---|
+| `SANITY_API_TOKEN` | Vercel env vars (Production) + your local `.env.local` | sanity.io/manage → project → **API → Tokens** → create a new **Editor** token, paste into Vercel, redeploy |
+| `SANITY_REVALIDATE_SECRET` | Vercel env vars + the Sanity webhook config | Any random string; must match on both sides (Vercel env var ↔ sanity.io/manage → API → Webhooks → Secret) |
+| Sanity login | Personal — each editor logs in with their own Sanity account | Add/remove members at sanity.io/manage → project → **Members** |
+| Hostinger login | Held by the domain owner | Hostinger account; enable 2FA |
+| Vercel login | Personal — each dev logs in with their own account | Add/remove at Vercel → Team/Project → **Members** |
+
+**If any token was ever shared over chat/email, rotate it.** Generate a fresh
+one in the relevant dashboard, update it in Vercel, redeploy, and delete the
+old one.
+
+### Accessing Sanity Studio
+
+The CMS lives at **https://algoritham.com/studio** (also `/studio` locally).
+
+1. You must be a **member** of Sanity project `gphbi065`. The project owner
+   adds you at sanity.io/manage → project → **Members** → Invite (by email).
+2. Once invited, accept the email, then open `/studio` and log in with that
+   Sanity account (Google / GitHub / email — whatever the account uses).
+3. If Studio shows a **CORS error**, the domain isn't whitelisted yet. The
+   owner adds it at sanity.io/manage → project → **API → CORS Origins**
+   (with "Allow credentials" ✓), or runs `npm run sanity:setup`.
+
+**Roles** (set per member in the Members panel):
+- **Administrator / Owner** — full control, can manage members, API, billing
+- **Editor / Developer** — read + write all content (what most editors need)
+- **Viewer** — read-only (cannot publish or run the seed script)
+
+---
+
+## Ownership transfer
+
+To hand the project to a new owner **while keeping a developer on board**,
+decide up front between two patterns:
+
+- **Full transfer** — everything moves to the new owner's account; the
+  previous dev is re-added as a collaborator afterwards (owner controls that
+  access).
+- **Shared org (recommended)** — create an Organization/Team on each platform;
+  both parties are members and retain independent access.
+
+Do the steps in this order so the deploy pipeline never breaks:
+
+**Step 0 — the new owner creates accounts first**
+They sign up for GitHub, Vercel, and Sanity (using the company email), and send
+back their **GitHub username** and **Vercel team name** (an email address alone
+cannot receive a repo or project).
+
+**Step 1 — Sanity (lowest risk, no pipeline dependency)**
+1. sanity.io/manage → project `gphbi065` → **Members** → Invite the new owner
+   as **Administrator**.
+2. Under the organization (`oEhGWitni`) settings, set them as **Owner**.
+3. Keep the outgoing dev as **Editor/Developer** so they retain access.
+4. New owner rotates `SANITY_API_TOKEN` (create fresh Editor token) and updates
+   it in Vercel.
+
+**Step 2 — GitHub (repo)**
+1. Repo → **Settings → Danger Zone → Transfer** → enter the new owner's
+   username (or transfer to their Organization). They accept via email.
+2. New owner re-adds the dev: repo → **Settings → Collaborators** → add the
+   dev's username with **Write** (or Admin) access.
+
+**Step 3 — Vercel (hosting)**
+1. Project → **Settings → Advanced → Transfer Project** → select the new
+   owner's team. They accept.
+2. **Reconnect Git**: after the GitHub transfer, Project → **Settings → Git** →
+   reconnect to the new repo location (auto-deploy breaks until you do this).
+3. **Re-add env vars** on the new team's project: `SANITY_API_TOKEN`,
+   `SANITY_REVALIDATE_SECRET` (transfers can drop these).
+4. **Re-check domains**: Project → **Settings → Domains** → confirm
+   `algoritham.com` + `www` are attached; re-add if needed.
+5. New owner re-adds the dev: Team → **Settings → Members** → invite the dev.
+
+**Step 4 — verify end to end**
+1. Push a trivial commit → confirm Vercel auto-deploys.
+2. Open `https://algoritham.com` and `/studio` → both load.
+3. Submit a test contact/newsletter form → confirm it appears in Studio.
+4. Edit something in Studio + publish → confirm the site updates.
+
+**Keep-developer-access checklist** — after transfer, the dev should have:
+- [ ] GitHub: collaborator with Write access
+- [ ] Vercel: team/project member
+- [ ] Sanity: project member with Editor/Developer role
 
 ---
 
