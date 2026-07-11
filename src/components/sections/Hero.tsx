@@ -100,8 +100,8 @@ export function Hero({ home, uptimeSLA, site }: Props) {
         {/* (1) Badge */}
         {home.heroEyebrow && (
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 10 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.55, ease: "easeOut" }}
             className="mb-10"
           >
@@ -120,10 +120,13 @@ export function Hero({ home, uptimeSLA, site }: Props) {
 
         {/* (2) Headline — block-stacked. Gradient sweep sits on the
             middle phrase; pre/post stay plain bold. */}
+        {/* LCP element: transform-only entrance (no opacity fade) so the
+            server-rendered HTML is visible at first paint. Fading it from
+            opacity 0 previously delayed LCP until JS hydrated. */}
         <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
+          initial={{ y: 18 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
           className="font-black tracking-tight leading-[1.02] mb-7 w-full text-[var(--text-1)]"
         >
           {home.heroHeadlinePre && (
@@ -150,9 +153,9 @@ export function Hero({ home, uptimeSLA, site }: Props) {
         {/* (3) Description */}
         {home.heroBrandLine && (
           <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.28 }}
+            initial={{ y: 12 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.55, delay: 0.12 }}
             className="text-[var(--text-2)] text-base sm:text-lg leading-relaxed max-w-2xl mb-10"
           >
             {home.heroBrandLine}
@@ -162,9 +165,9 @@ export function Hero({ home, uptimeSLA, site }: Props) {
         {/* Long subhead — only if editor adds one */}
         {home.heroSubhead && (
           <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.34 }}
+            initial={{ y: 12 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.55, delay: 0.16 }}
             className="text-[var(--text-3)] text-sm sm:text-base leading-relaxed max-w-xl -mt-4 mb-10"
           >
             {home.heroSubhead}
@@ -173,9 +176,9 @@ export function Hero({ home, uptimeSLA, site }: Props) {
 
         {/* (4) CTA — primary button + both phone numbers stacked below */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          initial={{ y: 12 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           className="flex flex-col items-center gap-5"
         >
           {home.heroPrimaryCta && (
@@ -214,9 +217,9 @@ export function Hero({ home, uptimeSLA, site }: Props) {
         {/* (5) Trust-signal strip */}
         {badges.length > 0 && (
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.55 }}
+            initial={{ y: 10 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.55, delay: 0.26 }}
             className="mt-14 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-[10px] sm:text-[11px] font-semibold tracking-widest uppercase text-[var(--text-3)]"
           >
             {badges.map(({ Icon, label, color }, i) => (
