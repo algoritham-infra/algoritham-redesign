@@ -11,6 +11,21 @@ export type Faq = { q: string; a: string; keywords: string[] };
 
 export const FAQS: Faq[] = [
   {
+    q: "What is Algoritham / what is this website about?",
+    a: "Algoritham Infrastructure Pvt. Ltd. is a Mumbai-based national IT integrator operating since 2009. This is the company's website — it covers our managed IT services (infrastructure, cloud, cybersecurity, networking, telecom, system integration), the industries we serve, our track record (1200+ enterprise projects, 99.99% uptime SLA), and how to get in touch.",
+    keywords: ["about", "what is", "what's this", "this website", "this site", "this company", "who is algoritham", "overview", "tell me about", "explain", "what do you do", "what does algoritham"],
+  },
+  {
+    q: "Who is Princy Gupta?",
+    a: "Princy Gupta is your primary point of contact at Algoritham. Reach her directly at +91 95942 67666 for enquiries, a free IT assessment, or to schedule a meeting.",
+    keywords: ["princy", "gupta", "who is princy", "contact person", "point of contact", "who do i contact", "who do i talk"],
+  },
+  {
+    q: "Who are you and what can you do?",
+    a: "I'm Algoritham's website assistant. I can answer questions about our IT services, coverage, certifications, and case studies, connect you to the team by phone, or help you schedule a meeting. What would you like to know?",
+    keywords: ["who are you", "what can you do", "what do you do", "are you a bot", "are you human", "your name", "help me"],
+  },
+  {
     q: "What services does Algoritham Infrastructure offer?",
     a: "Six core services: enterprise Infrastructure (servers, data centers, storage, virtualization), Cloud Solutions (IaaS/PaaS/SaaS on AWS, Azure, Google Cloud), Cybersecurity (FortiGate UTM, zero-trust), Networking (firewalls, MPLS, SD-WAN, 24/7 NOC), Telecom (40+ carriers, hosted PBX, SIP), and System Integration (ISO 9001 / ITIL delivery).",
     keywords: ["service", "services", "offer", "do", "provide", "what"],

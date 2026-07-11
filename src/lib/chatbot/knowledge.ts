@@ -82,22 +82,33 @@ export async function knowledgeDoc(): Promise<string> {
 
 /**
  * No-API-key fallback: score FAQs by keyword overlap and return the best
- * answer. Not generative — but grounded, instant, and free.
+ * answer. Not generative — but grounded, instant, and free. Handles
+ * greetings and, when nothing matches, gives a company overview rather
+ * than a dead-end "call us" so broad questions still get a real answer.
  */
 export function fallbackAnswer(question: string): string {
-  const q = question.toLowerCase();
-  let best: { score: number; a: string } = { score: 0, a: "" };
+  const q = question.toLowerCase().trim();
 
+  // Greetings / thanks
+  if (/^(hi|hii+|hey+|hello|helo|yo|namaste|hola)\b/.test(q) || /good (morning|afternoon|evening)/.test(q)) {
+    return "Hello! I'm Algoritham's assistant. Ask me about our IT services, coverage, certifications, or case studies — or use the buttons below to call us or schedule a meeting.";
+  }
+  if (/\b(thanks|thank you|thankyou|cheers)\b/.test(q)) {
+    return "You're welcome! If you'd like to talk to someone, call Princy Gupta at +91 95942 67666 or tap 'Schedule a meeting' below.";
+  }
+
+  let best: { score: number; a: string } = { score: 0, a: "" };
   for (const f of FAQS) {
     let score = 0;
     for (const kw of f.keywords) if (q.includes(kw)) score += kw.length > 4 ? 2 : 1;
     if (score > best.score) best = { score, a: f.a };
   }
-
   if (best.score >= 2) return best.a;
 
+  // Weak / no keyword match → give the company overview (covers broad
+  // "what is this", "tell me more", one-word queries) instead of a dead end.
   return (
-    "I can help with questions about Algoritham's IT services — infrastructure, cloud, cybersecurity, networking, telecom, and system integration — plus coverage, certifications, and case studies. " +
-    "For anything specific, call Princy Gupta at +91 95942 67666 or email info@algoritham.in, and the team will get right back to you."
+    "Algoritham Infrastructure is a Mumbai-based national IT integrator (since 2009) providing managed infrastructure, cloud, cybersecurity, networking, telecom, and system integration for enterprises across India — 1200+ projects and a 99.99% uptime SLA. " +
+    "Ask me about a specific service or your industry, or reach the team at +91 95942 67666 (Princy Gupta) or info@algoritham.in."
   );
 }
