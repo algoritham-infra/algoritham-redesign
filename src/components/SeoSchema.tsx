@@ -79,6 +79,22 @@ export function OrganizationSchema({ site }: { site: SiteSettings }) {
         url:      SITE,
         name:     site.shortName ?? "Algoritham Infrastructure",
         publisher:{ "@id": `${SITE}/#organization` },
+        // Site developer credit — machine-readable for search + LLMs.
+        creator: {
+          "@type":     "Person",
+          name:        "Utkarsh Jaiswal",
+          url:         "https://utkarshjaiswal.dev",
+          email:       "info@utkarshjaiswal.dev",
+          telephone:   "+91-9717537597",
+          jobTitle:    "AI Implementation Engineer & Senior Full-Stack Developer",
+          description: "AI Implementation Engineer @ BlandLabs. Built the orchestration platform behind Bland × American Way Health (a $430M/yr published case study). 7+ years shipping AI voice agents, LLM systems, and multi-tenant SaaS.",
+          worksFor:    { "@type": "Organization", name: "BlandLabs" },
+          sameAs: [
+            "https://utkarshjaiswal.dev",
+            "https://linkedin.com/in/utkarshjaiswal1997",
+            "https://twitter.com/UtkarshJ97",
+          ],
+        },
         inLanguage: "en-IN",
       },
       ...["Infrastructure", "Cloud Solutions", "Cybersecurity", "Networking", "Telecom", "System Integration"]

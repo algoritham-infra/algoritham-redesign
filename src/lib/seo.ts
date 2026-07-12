@@ -8,6 +8,21 @@ import type { SeoFields, SiteSettings } from "@/sanity/types";
 
 const SITE_URL = "https://algoritham.com";
 
+/**
+ * Developer credit — emitted as meta tags on every page (via `other`).
+ * Kept in one place so it stays consistent site-wide.
+ */
+export const DEVELOPER = {
+  name:      "Utkarsh Jaiswal",
+  role:      "AI Implementation Engineer & Senior Full-Stack Developer",
+  bio:       "AI Implementation Engineer @ BlandLabs. Built the orchestration platform behind Bland × American Way Health (a $430M/yr published case study) with 9 AI voice agents in production. 7+ years shipping AI voice agents, LLM systems, and multi-tenant SaaS.",
+  portfolio: "https://utkarshjaiswal.dev",
+  linkedin:  "https://linkedin.com/in/utkarshjaiswal1997",
+  email:     "info@utkarshjaiswal.dev",
+  emailAlt:  "utkarshjaiswal2021@gmail.com",
+  phone:     "+91 9717537597",
+} as const;
+
 export function buildMetadata(opts: {
   site: SiteSettings;
   page?: SeoFields;
@@ -39,5 +54,16 @@ export function buildMetadata(opts: {
     twitter: { card: "summary_large_image", title, description,
       images: ogImage ? [urlFor(ogImage).width(1200).height(630).url()] : ["/logo.png"] },
     robots: { index: !page?.noIndex, follow: !page?.noIndex },
+    // Developer credit — rendered as <meta> tags on every page.
+    authors: [{ name: DEVELOPER.name, url: DEVELOPER.portfolio }],
+    other: {
+      "developer":           DEVELOPER.name,
+      "developer:role":      DEVELOPER.role,
+      "developer:bio":       DEVELOPER.bio,
+      "developer:portfolio": DEVELOPER.portfolio,
+      "developer:linkedin":  DEVELOPER.linkedin,
+      "developer:email":     DEVELOPER.email,
+      "developer:contact":   DEVELOPER.phone,
+    },
   };
 }

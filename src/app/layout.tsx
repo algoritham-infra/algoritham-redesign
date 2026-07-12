@@ -33,16 +33,17 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s · ${site.shortName ?? "Algoritham"} Infrastructure`,
     },
     applicationName: site.name,
-    authors:    [{ name: site.name ?? "Algoritham", url: SITE_URL }],
+    // Developer credit as author (site by Utkarsh Jaiswal); company remains
+    // the creator/publisher of the content.
+    authors:    [{ name: "Utkarsh Jaiswal", url: "https://utkarshjaiswal.dev" }],
     creator:    site.name,
     publisher:  site.name,
     generator:  "Next.js",
     category:   "Information Technology Services",
-    icons: {
-      icon:     [{ url: "/logo.png", type: "image/png" }],
-      shortcut: "/logo.png",
-      apple:    "/logo.png",
-    },
+    // Favicons are handled by the App Router file convention:
+    //   src/app/favicon.ico, src/app/icon.png, src/app/apple-icon.png
+    // (all generated from the company logo). No manual icons block needed —
+    // a manual one would override the file convention.
   };
 }
 

@@ -314,6 +314,19 @@ export function Footer({ footer, site }: Props) {
             </span>
           </div>
         </div>
+
+        {/* Developer credit */}
+        <div className="pt-5 text-center md:text-right">
+          <a
+            href="https://utkarshjaiswal.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Utkarsh Jaiswal — AI Implementation Engineer & Full-Stack Developer · Portfolio: utkarshjaiswal.dev · LinkedIn: linkedin.com/in/utkarshjaiswal1997 · info@utkarshjaiswal.dev · +91 9717537597"
+            className="text-[11px] text-[var(--text-3)] hover:text-[var(--accent-violet)] transition-colors"
+          >
+            Designed &amp; developed by <span className="font-semibold">Utkarsh Jaiswal</span>
+          </a>
+        </div>
       </div>
     </footer>
   );
