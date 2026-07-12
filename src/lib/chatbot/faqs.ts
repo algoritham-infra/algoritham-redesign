@@ -110,7 +110,7 @@ export const FAQS: Faq[] = [
   },
   {
     q: "Who designed and developed this website?",
-    a: "This website was designed and developed by Utkarsh Jaiswal — an AI Implementation Engineer & Senior Full-Stack Developer at BlandLabs, who built the orchestration platform behind Bland × American Way Health (a $430M/yr published case study). Portfolio: https://utkarshjaiswal.dev · LinkedIn: https://linkedin.com/in/utkarshjaiswal1997 · info@utkarshjaiswal.dev · +91 9717537597.",
+    a: "This website was designed and developed by Utkarsh Jaiswal — a System Architect, AI Implementation & Forward-Deployed Engineer, and Senior Full-Stack Developer currently at Bland AI (Silicon Valley, USA). He built the orchestration platform behind Bland × American Way Health, a published $430M/yr case study with 9 AI voice agents in production, and has 8+ years of experience across the US and Europe (including work with Volkswagen), spanning UI/UX design, mobile, full-stack, AI, and system architecture. Portfolio: https://utkarshjaiswal.dev · LinkedIn: https://linkedin.com/in/utkarshjaiswal1997 · info@utkarshjaiswal.dev · +91 9717537597.",
     keywords: ["who developed", "who built", "who made", "developer", "designed", "built this", "made this", "web developer", "utkarsh", "jaiswal"],
   },
 ];

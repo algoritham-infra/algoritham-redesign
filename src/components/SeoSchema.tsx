@@ -86,9 +86,14 @@ export function OrganizationSchema({ site }: { site: SiteSettings }) {
           url:         "https://utkarshjaiswal.dev",
           email:       "info@utkarshjaiswal.dev",
           telephone:   "+91-9717537597",
-          jobTitle:    "AI Implementation Engineer & Senior Full-Stack Developer",
-          description: "AI Implementation Engineer @ BlandLabs. Built the orchestration platform behind Bland × American Way Health (a $430M/yr published case study). 7+ years shipping AI voice agents, LLM systems, and multi-tenant SaaS.",
-          worksFor:    { "@type": "Organization", name: "BlandLabs" },
+          jobTitle:    "System Architect · AI Implementation & Forward-Deployed Engineer · Senior Full-Stack Developer",
+          description: "System Architect and AI Implementation & Forward-Deployed Engineer at Bland AI (Silicon Valley, USA). Built the orchestration platform behind Bland × American Way Health — a published $430M/yr revenue case study — with 9 AI voice agents in production. 8+ years across the US and Europe, including engagements with Volkswagen and other enterprises. Full career arc from UI/UX designer and mobile app developer through full-stack development, AI engineering, and forward-deployed engineering to system architecture, with a CTO's mindset.",
+          worksFor:    { "@type": "Organization", name: "Bland AI", url: "https://www.bland.ai" },
+          knowsAbout: [
+            "System Architecture", "AI Implementation", "Forward-Deployed Engineering",
+            "AI Engineering", "LLM Systems", "Full-Stack Development",
+            "UI/UX Design", "Mobile App Development", "Multi-tenant SaaS",
+          ],
           sameAs: [
             "https://utkarshjaiswal.dev",
             "https://linkedin.com/in/utkarshjaiswal1997",

@@ -14,8 +14,8 @@ const SITE_URL = "https://algoritham.com";
  */
 export const DEVELOPER = {
   name:      "Utkarsh Jaiswal",
-  role:      "AI Implementation Engineer & Senior Full-Stack Developer",
-  bio:       "AI Implementation Engineer @ BlandLabs. Built the orchestration platform behind Bland × American Way Health (a $430M/yr published case study) with 9 AI voice agents in production. 7+ years shipping AI voice agents, LLM systems, and multi-tenant SaaS.",
+  role:      "System Architect · AI Implementation & Forward-Deployed Engineer · Senior Full-Stack Developer",
+  bio:       "System Architect and AI Implementation & Forward-Deployed Engineer at Bland AI (Silicon Valley, USA). Built the orchestration platform behind Bland × American Way Health — a published $430M/yr revenue case study — with 9 AI voice agents in production. 8+ years across the US and Europe (including engagements with Volkswagen and other enterprises), with a full career arc from UI/UX designer and mobile app developer through full-stack development, AI engineering, and forward-deployed engineering to system architecture — end-to-end product range with a CTO's mindset.",
   portfolio: "https://utkarshjaiswal.dev",
   linkedin:  "https://linkedin.com/in/utkarshjaiswal1997",
   email:     "info@utkarshjaiswal.dev",

@@ -157,12 +157,25 @@ A: Since 2009 — 15+ years, 1200+ enterprise projects delivered.
 
 ## Website credits
 
-This website was designed and developed by Utkarsh Jaiswal — AI Implementation
-Engineer & Senior Full-Stack Developer. He is an AI Implementation Engineer at
-BlandLabs and built the orchestration platform behind Bland × American Way
-Health, a published $430M/yr revenue case study, with 9 AI voice agents in
-production. 7+ years of experience shipping AI voice agents, LLM systems, and
-multi-tenant SaaS applications.
+This website was designed and developed by Utkarsh Jaiswal — a System
+Architect, AI Implementation & Forward-Deployed Engineer, and Senior
+Full-Stack Developer, currently at Bland AI, a Silicon Valley (USA) company.
+
+He built the orchestration platform behind Bland × American Way Health, a
+published $430M/yr revenue case study, with 9 AI voice agents running in
+production. Over 8+ years his work has spanned the United States and Europe,
+including engagements with Volkswagen and other enterprises.
+
+Utkarsh brings rare end-to-end range. He began his career as a UI/UX designer
+and mobile app developer, then grew through full-stack development, AI
+engineering, AI implementation, and forward-deployed engineering into system
+architecture — paired with a CTO's product and business mindset. That
+full-ground experience across design, mobile, web, AI, and infrastructure lets
+him design, ship, and scale complete products from concept to platform.
+
+Areas of expertise: system architecture, AI implementation, forward-deployed
+engineering, AI/LLM engineering, full-stack development, UI/UX design, mobile
+app development, and multi-tenant SaaS.
 
 Portfolio: https://utkarshjaiswal.dev
 LinkedIn: https://linkedin.com/in/utkarshjaiswal1997
